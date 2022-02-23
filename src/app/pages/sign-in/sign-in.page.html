@@ -1,10 +1,46 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-title>sign-in</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+  <ion-content>
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" novalidate>
+      
+      <ion-item lines="full">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="userName" type="email"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.required">
+        Email is required.
+      </span>
+      
+
+      <ion-item lines="full">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input formControlName="userPassword" type="text"></ion-input>
+      </ion-item>
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required">
+        password is required.
+      </span>
+
+     
+      <ion-row>
+        <ion-col>
+          <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+
+
+
+
+
+
+
+
   <div class="displayTable">
     <div class="displayTableCell">
       <div class="authBlock">
