@@ -1,37 +1,72 @@
-<ion-header>
+<!-- <ion-header>
   <ion-toolbar color="primary">
     <ion-title>sign-in</ion-title>
   </ion-toolbar>
-</ion-header>
+</ion-header> -->
 
-<ion-content>
+<!-- <ion-content> -->
 
-  <ion-content>
-    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" novalidate>
+  <ion-content color="tertiary">
+
+    <!-- lOGO sECTION -->
+    <div class="logo_section ion-text-center">
+      <h3>Hello Again!</h3>
+      <h4>Welcome back you've been missed!</h4>
+
+    </div>
+
+
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitForm()" class="radius-form" novalidate>
       
-      <ion-item lines="full">
-        <ion-label position="floating">Email</ion-label>
-        <ion-input formControlName="userName" type="email"></ion-input>
+      <ion-item lines="none">
+        <!-- <ion-label position="floating">Email</ion-label> -->
+        <ion-input placeholder="Email" formControlName="userName" type="email"></ion-input>
       </ion-item>
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.required">
         Email is required.
       </span>
       
 
-      <ion-item lines="full">
-        <ion-label position="floating">Password</ion-label>
-        <ion-input formControlName="userPassword" type="text"></ion-input>
+      <ion-item lines="none">
+        <!-- <ion-label position="floating">Password</ion-label> -->
+        <ion-input placeholder="Password" formControlName="userPassword" type="text"></ion-input>
       </ion-item>
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required">
         password is required.
       </span>
 
+      <!-- Forgot password Link -->
+      <div class="ion-text-right forgot">
+        <ion-text  routerLink="/forgot-password">Forgot Password</ion-text>
+      </div>
      
-      <ion-row>
-        <ion-col>
-          <ion-button type="submit" color="danger" expand="block">Submit</ion-button>
-        </ion-col>
-      </ion-row>
+      <div>
+        <ion-button type="submit" color="secondary" expand="block">Submit</ion-button>
+      </div>
+
+      <!-- Social Logins -->
+      <div class="ion-text-center social">
+        <ion-text >or Continue With</ion-text>
+        <ion-row>
+          <!-- <ion-col> -->
+            <div class="img" (click)="authService.GoogleAuth()">
+              <ion-icon src="../assets/icon/google.svg"></ion-icon>
+            </div>
+          <!-- </ion-col>
+          <ion-col> -->
+            <div class="img">
+              <ion-icon src="../assets/icon/facebook.svg"></ion-icon>
+            </div>
+          <!-- </ion-col> -->
+        </ion-row>
+      </div>
+
+      <!-- Signup link -->
+      <div class="not-user ion-text-center">
+        <ion-text >Not a Member </ion-text>
+        <ion-text  routerLink="/sign-up" style="color:#0882de;">Register Now</ion-text>
+      </div>
     </form>
 
 
@@ -41,7 +76,8 @@
 
 
 
-  <div class="displayTable">
+
+  <!-- <div class="displayTable">
     <div class="displayTableCell">
       <div class="authBlock">
         <h3>Sign In</h3>
@@ -51,14 +87,14 @@
         <div class="formGroup">
           <input type="password" class="formControl" placeholder="Password" #userPassword required>
         </div>
-        <!-- Calling SignIn Api from AuthService -->
+        
         <div class="formGroup">
           <input type="button" class="btn btnPrimary" value="Log in" (click)="authService.SignIn(userName.value, userPassword.value)">
         </div>
         <div class="formGroup">
           <span class="or"><span class="orInner">Or</span></span>
         </div>
-        <!-- Calling GoogleAuth Api from AuthService -->
+
         <div class="formGroup">
           <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
             <i class="fab fa-google-plus-g"></i>
@@ -73,5 +109,5 @@
         <span>Don't have an account?<span class="redirect" routerLink="/sign-up"> Sign Up</span></span>
       </div>
     </div>
-  </div>
+  </div> -->
 </ion-content>
