@@ -26,7 +26,9 @@
       <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.required">
         Email is required.
       </span>
-      
+      <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.pattern">
+        Enter valid email address.
+      </span>
 
       <ion-item lines="none">
         <!-- <ion-label position="floating">Password</ion-label> -->
@@ -55,7 +57,7 @@
             </div>
           <!-- </ion-col>
           <ion-col> -->
-            <div class="img">
+            <div class="img" (click)="authService.FacebookAuth()">
               <ion-icon src="../assets/icon/facebook.svg"></ion-icon>
             </div>
           <!-- </ion-col> -->
