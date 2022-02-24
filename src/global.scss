@@ -24,3 +24,22 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+
+*{
+    font-family: 'Poppins', sans-serif;
+}
+
+ion-content{
+    --padding-start: 16px;
+    --padding-end: 16px;
+    --padding-top: 16px;
+}
+
+.radius-form{
+    ion-item{
+        margin-bottom: 18px;
+        --border-radius: 6px;
+    }
+}
