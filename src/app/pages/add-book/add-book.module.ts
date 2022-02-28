@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 import { IonicModule } from '@ionic/angular';
 
-import { ForgotPasswordPageRoutingModule } from './forgot-password-routing.module';
+import { AddBookPageRoutingModule } from './add-book-routing.module';
 
-import { ForgotPasswordPage } from './forgot-password.page';
+import { AddBookPage } from './add-book.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     IonicModule,
-    ForgotPasswordPageRoutingModule
+    ReactiveFormsModule,
+    AddBookPageRoutingModule
   ],
-  declarations: [ForgotPasswordPage]
+  declarations: [AddBookPage]
 })
-export class ForgotPasswordPageModule {}
+export class AddBookPageModule {}

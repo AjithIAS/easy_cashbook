@@ -1,0 +1,15 @@
+.carat-down{
+    font-size: 14px;
+}
+// Toolbar
+ion-toolbar{
+    --background: #4863d4;
+    ion-title{
+        color:white;
+    }
+}
+
+.toolbar_btn{
+    --color:white;
+    text-transform: capitalize;
+}

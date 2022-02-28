@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar >
+    <ion-buttons slot="start" (click)="close()">
+      <ion-button>
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Create New Book</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="bookForm" (ngSubmit)="submitBook()" class="radius-form" novalidate>
+      
+    <ion-item lines="none">
+      <ion-input  placeholder="Book Name" formControlName="name" type="text"></ion-input>
+    </ion-item>
+    <span class="error ion-padding" *ngIf="isSubmitted && errorControl.name.errors?.required">
+      Name is required.
+    </span>
+
+    <ion-item lines="none">
+      <ion-input placeholder="Description" formControlName="description" type="text"></ion-input>
+    </ion-item>
+   
+   
+    <div>
+      <ion-button type="submit" color="secondary" expand="block">Submit</ion-button>
+    </div>
+
+
+
+  </form>
+</ion-content>

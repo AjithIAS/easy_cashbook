@@ -1,0 +1,40 @@
+<ion-header>
+ 
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="arrow-back-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="dark">Your Cash Books</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="primary"> 
+        <ion-icon name="search-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>  
+</ion-header>
+
+<ion-content color="">
+
+  <ion-item lines="full" *ngFor="let book of books">
+    <ion-thumbnail slot="start">
+      <ion-icon color="primary" name="book"></ion-icon>
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{book.name}}</h2>
+      <p>{{book.created_at | date:'dd MMM yyyy'}}</p>
+    </ion-label>
+    <ion-icon (click)="openMenus($event,book.id)" color="primary" name="ellipsis-vertical"></ion-icon>
+  </ion-item>
+
+
+    <!-- fab placed to the bottom start -->
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="addBook()">
+        <ion-icon name="add"></ion-icon>
+
+      </ion-fab-button>
+    </ion-fab> 
+    
+</ion-content>
