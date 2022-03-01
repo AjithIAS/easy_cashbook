@@ -1,19 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService
  } from 'src/app/services/auth.service';
+ import { DataService } from 'src/app/services/data.service';
+ import { IonRouterOutlet } from '@ionic/angular';
+ import { ModalController } from '@ionic/angular';
+import { AddBookPage } from '../add-book/add-book.page';
+import { BooksPage } from '../books/books.page';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
 export class DashboardPage implements OnInit {
-
-  constructor(public authService : AuthService) { }
+  i:any;
+  constructor(
+    public authService : AuthService,
+    public data :DataService,
+    private routerOutlet: IonRouterOutlet,
+    private modalController: ModalController
+    ) { }
 
   ngOnInit() {
-    console.log(this.authService.userData.toJSON())
-    let user = this.authService.userData.toJSON();
-    // this.authService.addBook(user.uid)
+    
+  }
+
+
+  // Open BOOKS
+  async openBooks() {
+    const modal = await this.modalController.create({
+      component: BooksPage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
 
   test(){

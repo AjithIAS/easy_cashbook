@@ -1,5 +1,15 @@
-import { Injectable } from '@angular/core';
 
+import { Injectable, NgZone } from '@angular/core';
+import { User } from "../shared/services/user";
+import { auth } from 'firebase/app';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFireDatabase, SnapshotAction } from '@angular/fire/database';
+import { Router } from "@angular/router";
+import { AuthService } from './auth.service';
+import { Books } from '../shared/intefaces/expense-model';
+import { Observable } from 'rxjs';
+// import { popoverController } from '@ionic/core';
 export interface Message {
   fromName: string;
   subject: string;
@@ -12,72 +22,61 @@ export interface Message {
   providedIn: 'root'
 })
 export class DataService {
-  public messages: Message[] = [
-    {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
-      id: 0,
-      read: false
-    },
-    {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
-      id: 1,
-      read: false
-    },
-    {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
-      id: 2,
-      read: false
-    },
-    {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
-      id: 3,
-      read: false
-    },
-    {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
-      id: 4,
-      read: false
-    },
-    {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
-      id: 5,
-      read: false
-    },
-    {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
-      id: 6,
-      read: false
-    },
-    {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
-      id: 7,
-      read: false
-    }
-  ];
 
-  constructor() { }
-
-  public getMessages(): Message[] {
-    return this.messages;
+  userData :any;
+  constructor(
+    public afs: AngularFirestore,   // Inject Firestore service
+    public afAuth: AngularFireAuth, // Inject Firebase auth service
+    public router: Router,  
+    public ngZone: NgZone, // NgZone service to remove outside scope warning
+    public db: AngularFireDatabase,
+    public auth: AuthService,
+    // public popover : popoverController
+  ) { 
+    this.userData = this.auth.getUser();
   }
 
-  public getMessageById(id: number): Message {
-    return this.messages[id];
+  // Create New Books
+  addBook(data:Books){       
+    return this.db.database.ref('users/' + this.userData.uid + '/books/').push(
+      data
+    );
   }
+
+  // Get Books BY USER
+  getBooks(): Observable<SnapshotAction<any>[]>{
+      return this.db.list('users/' + this.userData.uid + '/books').snapshotChanges();
+  }
+
+
+  // DELETE Book by user
+  deleteBook(key: string): Promise<void> {
+    return this.db.list('users/' + this.userData.uid + '/books').remove(key);
+  }
+
+  // GET BOOK BY ID
+  getbook(id:string) {
+  console.log(id)
+    return this.db.database.ref('users/' + this.userData.uid + '/books').orderByChild('name').equalTo(id).once('value');
+  }
+
+  editBook(key: string, bookData:Books): Promise<void> {
+    return this.db.list('users/' + this.userData.uid + '/books').update(key, bookData);
+  }
+
+
+
+
+
+  // Parse Data 
+  parseData(obj){
+    const data = [];
+      obj.forEach(snapshot => {
+      const expense = snapshot.payload.exportVal();
+      expense.id = snapshot.key;
+      data.push(expense);
+    });
+    return data;
+  }
+
 }
