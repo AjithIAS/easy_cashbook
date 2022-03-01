@@ -66,6 +66,8 @@ export class AuthService {
       this.router.navigate(['verify-email']);
     })
   }
+
+
   // Reset Forggot password
   ForgotPassword(passwordResetEmail) {
     return this.afAuth.auth.sendPasswordResetEmail(passwordResetEmail)
@@ -75,11 +77,19 @@ export class AuthService {
       window.alert(error)
     })
   }
+
+
   // Returns true when user is looged in and email is verified
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user'));
     return (user !== null && user.emailVerified !== false) ? true : false;
   }
+
+  getUser(){
+    return JSON.parse(localStorage.getItem('user'));
+  }
+
+
   // Sign in with Google
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider());

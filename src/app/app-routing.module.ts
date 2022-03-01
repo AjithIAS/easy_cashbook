@@ -35,7 +35,15 @@ const routes: Routes = [
   {
     path: 'verify-email',
     loadChildren: () => import('./pages/verify-emai/verify-emai.module').then( m => m.VerifyEmaiPageModule)
+  },  {
+    path: 'add-book',
+    loadChildren: () => import('./pages/add-book/add-book.module').then( m => m.AddBookPageModule)
   },
+  {
+    path: 'books',
+    loadChildren: () => import('./pages/books/books.module').then( m => m.BooksPageModule)
+  },
+
 ];
 
 @NgModule({

@@ -1,11 +1,66 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>sign-up</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content>
-  <div class="displayTable">
+
+<ion-content color="tertiary">
+      <!-- lOGO sECTION -->
+      <div class="logo_section ion-text-center">
+        <h3>Sign Up</h3>
+        <h4>Welcome back you've been missed!</h4>
+  
+      </div>
+  
+  
+  
+      <form [formGroup]="signupForm" (ngSubmit)="submitForm()" class="radius-form" novalidate>
+        
+        <ion-item lines="none">
+          <!-- <ion-label position="floating">Email</ion-label> -->
+          <ion-input placeholder="Email" formControlName="userName" type="email"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.required">
+          Email is required.
+        </span>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userName.errors?.pattern">
+          Enter valid email address.
+        </span>
+  
+        <ion-item lines="none">
+          <!-- <ion-label position="floating">Password</ion-label> -->
+          <ion-input placeholder="Password" formControlName="userPassword" type="text"></ion-input>
+        </ion-item>
+        <span class="error ion-padding" *ngIf="isSubmitted && errorControl.userPassword.errors?.required">
+          password is required.
+        </span>
+  
+     
+       
+        <div>
+          <ion-button type="submit" color="secondary" expand="block">Submit</ion-button>
+        </div>
+  
+        <!-- Social Logins -->
+        <div class="ion-text-center social">
+          <ion-text >or Continue With</ion-text>
+          <ion-row>
+            <!-- <ion-col> -->
+              <div class="img" (click)="authService.GoogleAuth()">
+                <ion-icon src="../assets/icon/google.svg"></ion-icon>
+              </div>
+            <!-- </ion-col>
+            <ion-col> -->
+              <div class="img" (click)="authService.FacebookAuth()">
+                <ion-icon src="../assets/icon/facebook.svg"></ion-icon>
+              </div>
+            <!-- </ion-col> -->
+          </ion-row>
+        </div>
+  
+        <!-- Signup link -->
+        <div class="not-user ion-text-center">
+          <ion-text >Not a MemberAlready have an account? </ion-text>
+          <ion-text  routerLink="/sign-in" style="color:#0882de;">Login</ion-text>
+        </div>
+      </form>
+  <!-- <div class="displayTable">
     <div class="displayTableCell">
       <div class="authBlock">
         <h3>Sign Up</h3>
@@ -21,14 +76,14 @@
         <div class="formGroup">
           <span class="or"><span class="orInner">Or</span></span>
         </div>
-        <!-- Continue with Google -->
+       
         <div class="formGroup">
           <button type="button" class="btn googleBtn" (click)="authService.GoogleAuth()">
             <i class="fab fa-google-plus-g"></i>
             Continue with Google
           </button>
         </div>
-        <!-- Continue with Facebook -->
+       
         <div class="formGroup">
           <button type="button" class="btn facebookBtn" (click)="authService.FacebookAuth()">
             <i class="fab fa-facebook"></i>
@@ -40,5 +95,5 @@
         <span>Already have an account? <span class="redirect" routerLink="/sign-in">Log In</span></span>
       </div>
     </div>
-  </div>
+  </div> -->
 </ion-content>
