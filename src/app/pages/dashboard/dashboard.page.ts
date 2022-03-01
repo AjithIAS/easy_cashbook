@@ -11,6 +11,16 @@ export class DashboardPage implements OnInit {
   constructor(public authService : AuthService) { }
 
   ngOnInit() {
+    console.log(this.authService.userData.toJSON())
+    let user = this.authService.userData.toJSON();
+    // this.authService.addBook(user.uid)
   }
 
+  test(){
+    let data  = {
+      name: "test",
+      comments: "cmedddddd",
+    }
+    this.authService.test(data)
+  }
 }

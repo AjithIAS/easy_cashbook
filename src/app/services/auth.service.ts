@@ -12,6 +12,7 @@ import { Router } from "@angular/router";
 export class AuthService {
   userData: any; // Save logged in user data
   user: firebase.database.Reference;
+  userId:any;
   constructor(
     public afs: AngularFirestore,   // Inject Firestore service
     public afAuth: AngularFireAuth, // Inject Firebase auth service
@@ -41,6 +42,7 @@ export class AuthService {
           this.router.navigate(['dashboard']);
         });
         this.SetUserData(result.user);
+        // this.setData(result.user);
         return result;
       }).catch((error) => {
         window.alert(error.message)
@@ -54,7 +56,7 @@ export class AuthService {
         up and returns promise */
         this.SendVerificationMail();
         this.SetUserData(result.user);
-        this.setData(result.user);
+        // this.setData(result.user);
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -123,7 +125,16 @@ export class AuthService {
       emailVerified: user.emailVerified
     }).then((snap) => {
     }).catch(error => console.log(error));
+   
   }
+
+// Create Book
+test(expense: Expense) {
+  return this.db.database.ref('users/' + this.userData.uid + '/expenses').push(
+    expense
+  );
+}
+
   // Sign out 
   SignOut() {
     return this.afAuth.auth.signOut().then(() => {
@@ -131,4 +142,11 @@ export class AuthService {
       this.router.navigate(['sign-in']);
     })
   }
+}
+
+
+export interface Expense {
+  id?: string;
+  name: string;
+  comments?: string;
 }
